@@ -1,0 +1,54 @@
+{
+  "name": "vscode-sql-formatter",
+  "displayName": "SQL Formatter",
+  "description": "Format sql files using the sql-formatter npm package",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kufii/vscode-sql-formatter.git"
+  },
+  "engines": {
+    "vscode": "^1.38.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:sql"
+  ],
+  "contributes": {
+    " configuration": {
+      "type": "object",
+      "title": "SQL Formatter",
+      "properties": {
+        "sql-formatter.dialect": {
+          "scope": "resource",
+          "type": "string",
+          "enum": [
+            "sql",
+            "n1q1",
+            "db2",
+            "pl/sql"
+          ],
+          "default": "sql",
+          "description": "which dialect to format with (sql: Standard SQL, n1ql: Couchbase N1QL, db2: IBM DB2, pl/sql: Oracle PL/SQL)"
+        }
+      }
+    }
+  },
+  "main": "./src/extension.js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,jsx,md,json,css,prettierrc,eslintrc}\""
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-adpyke-es6": "^1.4.12",
+    "eslint-config-prettier": "^6.3.0",
+    "glob": "^7.1.4",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "sql-formatter": "^2.3.3"
+  }
+}
