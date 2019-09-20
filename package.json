@@ -25,7 +25,7 @@
     "onLanguage:sql"
   ],
   "contributes": {
-    " configuration": {
+    "configuration": {
       "type": "object",
       "title": "SQL Formatter",
       "properties": {
