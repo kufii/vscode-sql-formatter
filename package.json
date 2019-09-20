@@ -14,6 +14,13 @@
   "categories": [
     "Formatters"
   ],
+  "keywords": [
+    "sql",
+    "formatter",
+    "n1ql",
+    "db2",
+    "pl/sql"
+  ],
   "activationEvents": [
     "onLanguage:sql"
   ],
