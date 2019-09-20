@@ -3,6 +3,7 @@
   "displayName": "SQL Formatter",
   "description": "Format sql files using the sql-formatter npm package",
   "version": "1.0.0",
+  "publisher": "adpyke",
   "repository": {
     "type": "git",
     "url": "https://github.com/kufii/vscode-sql-formatter.git"
