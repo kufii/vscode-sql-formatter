@@ -1,3 +1,5 @@
+'use strict';
+
 const vscode = require('vscode');
 const sqlFormatter = require('sql-formatter');
 
