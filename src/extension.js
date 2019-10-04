@@ -12,12 +12,10 @@ const getRange = document =>
 	);
 
 const getConfig = () => {
-	const editorSettings = vscode.workspace.getConfiguration('editor', null);
 	const extensionSettings = vscode.workspace.getConfiguration('sql-formatter', null);
-	const indent = editorSettings.get('insertSpaces')
-		? ' '.repeat(editorSettings.get('tabSize'))
-		: '\t';
 	const language = extensionSettings.get('dialect', 'sql');
+	const { insertSpaces, tabSize } = vscode.window.activeTextEditor.options;
+	const indent = insertSpaces ? ' '.repeat(tabSize) : '\t';
 	return { indent, language };
 };
 
