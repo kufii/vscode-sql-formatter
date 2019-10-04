@@ -11,9 +11,18 @@ const getRange = document =>
 		document.lineAt(document.lineCount - 1).range.end.character
 	);
 
+const getSetting = (group, key, def) => {
+	const settings = vscode.workspace.getConfiguration(group, null);
+	const editor = vscode.window.activeTextEditor;
+	const language = editor && editor.document && editor.document.languageId;
+	const languageSettings = language && vscode.workspace.getConfiguration().get(`[${language}]`);
+	let value = languageSettings && languageSettings[`${group}.${key}`];
+	if (value == null) value = settings.get(key, def);
+	return value == null ? def : value;
+};
+
 const getConfig = () => {
-	const extensionSettings = vscode.workspace.getConfiguration('sql-formatter', null);
-	const language = extensionSettings.get('dialect', 'sql');
+	const language = getSetting('sql-formatter', 'dialect', 'sql');
 	const { insertSpaces, tabSize } = vscode.window.activeTextEditor.options;
 	const indent = insertSpaces ? ' '.repeat(tabSize) : '\t';
 	return { indent, language };
