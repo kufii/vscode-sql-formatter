@@ -8,7 +8,7 @@ const getSetting = (group, key, def) => {
 	const editor = vscode.window.activeTextEditor;
 	const language = editor && editor.document && editor.document.languageId;
 	const languageSettings = language && vscode.workspace.getConfiguration().get(`[${language}]`);
-	let value = languageSettings[`${group}.${key}`];
+	let value = languageSettings && languageSettings[`${group}.${key}`];
 	if (value == null) value = settings.get(key, def);
 	if (value == null) value = def;
 	return value;
