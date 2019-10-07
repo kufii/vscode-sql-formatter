@@ -3,14 +3,6 @@
 const vscode = require('vscode');
 const sqlFormatter = require('sql-formatter');
 
-const getRange = document =>
-	new vscode.Range(
-		0,
-		0,
-		document.lineCount - 1,
-		document.lineAt(document.lineCount - 1).range.end.character
-	);
-
 const getSetting = (group, key, def) => {
 	const settings = vscode.workspace.getConfiguration(group, null);
 	const editor = vscode.window.activeTextEditor;
@@ -21,6 +13,55 @@ const getSetting = (group, key, def) => {
 	return value == null ? def : value;
 };
 
+const getRange = document =>
+	new vscode.Range(
+		0,
+		0,
+		document.lineCount - 1,
+		document.lineAt(document.lineCount - 1).range.end.character
+	);
+
+const getBlocks = text => {
+	let inSingleQuote = false;
+	let inDoubleQuote = false;
+	let hyphenCount = 0;
+	const inComment = () => hyphenCount === 2;
+
+	const blocks = [];
+	let block = '';
+
+	for (const char of text) {
+		block += char;
+
+		if (inSingleQuote) {
+			if (char === "'") inSingleQuote = false;
+			hyphenCount = 0;
+			continue;
+		} else if (inDoubleQuote) {
+			if (char === '"') inDoubleQuote = false;
+			hyphenCount = 0;
+			continue;
+		} else if (inComment()) {
+			if (char === '\n') hyphenCount = 0;
+			continue;
+		}
+
+		if (char === "'") inSingleQuote = true;
+		else if (char === '"') inDoubleQuote = true;
+		else if (char === '-') hyphenCount++;
+		else {
+			hyphenCount = 0;
+			if (char === ';') {
+				blocks.push(block);
+				block = '';
+			}
+		}
+	}
+	if (block) blocks.push(block);
+
+	return blocks;
+};
+
 const getConfig = () => {
 	const language = getSetting('sql-formatter', 'dialect', 'sql');
 	const { insertSpaces, tabSize } = vscode.window.activeTextEditor.options;
@@ -28,7 +69,10 @@ const getConfig = () => {
 	return { indent, language };
 };
 
-const format = text => sqlFormatter.format(text, getConfig());
+const format = text =>
+	getBlocks(text)
+		.map(b => sqlFormatter.format(b, getConfig()))
+		.join('\n\n');
 
 module.exports.activate = () => {
 	vscode.languages.registerDocumentFormattingEditProvider('sql', {
