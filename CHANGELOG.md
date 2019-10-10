@@ -2,6 +2,10 @@
 
 All notable changes to the "SQL Formatter" extension will be documented in this file.
 
+## [1.1.2]
+
+- Fix comment formatting when using Windows line endings
+
 ## [1.1.0]
 
 - Now format all statements individually since sql-formatter doesn't always handle multiple statements correctly
