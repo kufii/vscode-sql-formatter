@@ -2,6 +2,7 @@
 
 const vscode = require('vscode');
 const sqlFormatter = require('sql-formatter');
+const eol = require('eol');
 
 const getSetting = (group, key, def) => {
 	const settings = vscode.workspace.getConfiguration(group, null);
@@ -70,7 +71,7 @@ const getConfig = () => {
 };
 
 const format = text =>
-	getBlocks(text)
+	getBlocks(eol.lf(text))
 		.map(b => sqlFormatter.format(b, getConfig()))
 		.join('\n\n');
 
