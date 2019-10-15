@@ -2,6 +2,10 @@
 
 All notable changes to the "SQL Formatter" extension will be documented in this file.
 
+## [1.1.3]
+
+- Format to have one linebreak at the end of the file
+
 ## [1.1.2]
 
 - Fix comment formatting when using Windows line endings

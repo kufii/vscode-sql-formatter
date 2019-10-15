@@ -73,7 +73,8 @@ const getConfig = () => {
 const format = text =>
 	getBlocks(eol.lf(text))
 		.map(b => sqlFormatter.format(b, getConfig()))
-		.join('\n\n');
+		.join('\n\n')
+		.trim() + '\n';
 
 module.exports.activate = () => {
 	vscode.languages.registerDocumentFormattingEditProvider('sql', {
