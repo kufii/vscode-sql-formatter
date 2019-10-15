@@ -64,11 +64,10 @@ const getBlocks = text => {
 	return blocks;
 };
 
-const getConfig = ({ insertSpaces, tabSize }) => {
-	const language = getSetting('sql-formatter', 'dialect', 'sql');
-	const indent = insertSpaces ? ' '.repeat(tabSize) : '\t';
-	return { indent, language };
-};
+const getConfig = ({ insertSpaces, tabSize }) => ({
+	indent: insertSpaces ? ' '.repeat(tabSize) : '\t',
+	language: getSetting('sql-formatter', 'dialect', 'sql')
+});
 
 const format = (text, config) =>
 	getBlocks(eol.lf(text))
