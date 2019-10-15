@@ -2,6 +2,10 @@
 
 All notable changes to the "SQL Formatter" extension will be documented in this file.
 
+## [1.2.0]
+
+- Added support for formatting selections
+
 ## [1.1.3]
 
 - Format to have one linebreak at the end of the file

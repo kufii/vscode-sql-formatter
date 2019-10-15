@@ -63,23 +63,27 @@ const getBlocks = text => {
 	return blocks;
 };
 
-const getConfig = () => {
+const getConfig = ({ insertSpaces, tabSize }) => {
 	const language = getSetting('sql-formatter', 'dialect', 'sql');
-	const { insertSpaces, tabSize } = vscode.window.activeTextEditor.options;
 	const indent = insertSpaces ? ' '.repeat(tabSize) : '\t';
 	return { indent, language };
 };
 
-const format = text =>
+const format = (text, config) =>
 	getBlocks(eol.lf(text))
-		.map(b => sqlFormatter.format(b, getConfig()))
+		.map(b => sqlFormatter.format(b, config))
 		.join('\n\n')
-		.trim() + '\n';
+		.trim();
 
 module.exports.activate = () => {
+	const provider = (document, range, options) => [
+		vscode.TextEdit.replace(range, format(document.getText(range), getConfig(options)))
+	];
 	vscode.languages.registerDocumentFormattingEditProvider('sql', {
-		provideDocumentFormattingEdits: document => [
-			vscode.TextEdit.replace(getRange(document), format(document.getText()))
-		]
+		provideDocumentFormattingEdits: (document, options) =>
+			provider(document, getRange(document), options)
+	});
+	vscode.languages.registerDocumentRangeFormattingEditProvider('sql', {
+		provideDocumentRangeFormattingEdits: provider
 	});
 };
