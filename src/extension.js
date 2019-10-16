@@ -15,14 +15,6 @@ const getSetting = (group, key, def) => {
 	return value == null ? def : value;
 };
 
-const getRange = document =>
-	new vscode.Range(
-		0,
-		0,
-		document.lineCount - 1,
-		document.lineAt(document.lineCount - 1).range.end.character
-	);
-
 const getBlocks = text => {
 	let inSingleQuote = false;
 	let inDoubleQuote = false;
@@ -75,15 +67,9 @@ const format = (text, config) =>
 		.join('\n\n')
 		.trim();
 
-module.exports.activate = () => {
-	const provider = (document, range, options) => [
-		vscode.TextEdit.replace(range, format(document.getText(range), getConfig(options)))
-	];
-	vscode.languages.registerDocumentFormattingEditProvider('sql', {
-		provideDocumentFormattingEdits: (document, options) =>
-			provider(document, getRange(document), options)
-	});
+module.exports.activate = () =>
 	vscode.languages.registerDocumentRangeFormattingEditProvider('sql', {
-		provideDocumentRangeFormattingEdits: provider
+		provideDocumentRangeFormattingEdits: (document, range, options) => [
+			vscode.TextEdit.replace(range, format(document.getText(range), getConfig(options)))
+		]
 	});
-};
