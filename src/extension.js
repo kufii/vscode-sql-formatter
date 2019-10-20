@@ -1,7 +1,7 @@
 'use strict';
 
 const vscode = require('vscode');
-const sqlFormatter = require('sql-formatter');
+const sqlFormatter = require('sql-formatter-plus');
 const eol = require('eol');
 
 const getSetting = (group, key, def) => {

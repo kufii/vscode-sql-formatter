@@ -58,6 +58,6 @@
   },
   "dependencies": {
     "eol": "^0.9.1",
-    "sql-formatter": "^2.3.3"
+    "sql-formatter-plus": "^1.0.0"
   }
 }
