@@ -50,14 +50,14 @@
     "format": "prettier --write \"**/*.{js,jsx,md,json,css,prettierrc,eslintrc}\""
   },
   "devDependencies": {
-    "eslint": "^6.4.0",
-    "eslint-config-adpyke-es6": "^1.4.12",
-    "eslint-config-prettier": "^6.3.0",
+    "eslint": "^6.5.1",
+    "eslint-config-adpyke-es6": "^1.4.13",
+    "eslint-config-prettier": "^6.4.0",
     "glob": "^7.1.4",
     "prettier": "^1.18.2"
   },
   "dependencies": {
     "eol": "^0.9.1",
-    "sql-formatter-plus": "^1.0.0"
+    "sql-formatter-plus": "^1.1.1"
   }
 }
