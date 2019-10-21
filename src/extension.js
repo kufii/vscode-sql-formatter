@@ -58,7 +58,8 @@ const getBlocks = text => {
 
 const getConfig = ({ insertSpaces, tabSize }) => ({
 	indent: insertSpaces ? ' '.repeat(tabSize) : '\t',
-	language: getSetting('sql-formatter', 'dialect', 'sql')
+	language: getSetting('sql-formatter', 'dialect', 'sql'),
+	uppercase: getSetting('sql-formatter', 'uppercase', false)
 });
 
 const format = (text, config) =>

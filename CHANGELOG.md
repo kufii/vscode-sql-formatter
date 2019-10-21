@@ -2,6 +2,10 @@
 
 All notable changes to the "SQL Formatter" extension will be documented in this file.
 
+## [1.3.0]
+
+- Added `sql-formatter.uppercase` option to convert keywords to uppercase
+
 ## [1.2.1]
 
 - Fixed formatting issues with unicode characters

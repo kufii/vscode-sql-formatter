@@ -39,7 +39,13 @@
             "pl/sql"
           ],
           "default": "sql",
-          "description": "which dialect to format with (sql: Standard SQL, n1ql: Couchbase N1QL, db2: IBM DB2, pl/sql: Oracle PL/SQL)"
+          "description": "Which dialect to format with (sql: Standard SQL, n1ql: Couchbase N1QL, db2: IBM DB2, pl/sql: Oracle PL/SQL)"
+        },
+        "sql-formatter.uppercase": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": false,
+          "description": "Convert keywords to uppercase"
         }
       }
     }
@@ -53,7 +59,7 @@
     "eslint": "^6.5.1",
     "eslint-config-adpyke-es6": "^1.4.13",
     "eslint-config-prettier": "^6.4.0",
-    "glob": "^7.1.4",
+    "glob": "^7.1.5",
     "prettier": "^1.18.2"
   },
   "dependencies": {
