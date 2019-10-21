@@ -1,10 +1,8 @@
 'use strict';
 
 const vscode = require('vscode');
-const sqlFormatter = require('sql-formatter-plus').default;
+const sqlFormatter = require('sql-formatter-plus');
 const eol = require('eol');
-
-console.log(sqlFormatter);
 
 const getSetting = (group, key, def) => {
 	const settings = vscode.workspace.getConfiguration(group, null);
