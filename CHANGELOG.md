@@ -2,6 +2,10 @@
 
 All notable changes to the "SQL Formatter" extension will be documented in this file.
 
+## [1.4.0]
+
+- Added `sql-formatter.linesBetweenQueries` option to configure how many line breaks you want between queries
+
 ## [1.3.0]
 
 - Added `sql-formatter.uppercase` option to convert keywords to uppercase
