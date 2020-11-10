@@ -28,9 +28,13 @@ const formatSelection = () => {
 		const document = editor.document;
 		const selection = editor.selection;
 		const text = document.getText(selection);
+		const options = {
+			insertSpaces: editor.insertSpaces,
+			tabSize: editor.tabSize,
+		};
 
 		if(text) {
-			const formatted = format(text);
+			const formatted = format(text, getConfig(options));
 			editor.edit(editBuilder => {
 				editBuilder.replace(selection, formatted);
 			});
