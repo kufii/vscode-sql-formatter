@@ -21,11 +21,37 @@ const getConfig = ({ insertSpaces, tabSize }) => ({
 	linesBetweenQueries: getSetting('sql-formatter', 'linesBetweenQueries', 2)
 });
 
+const formatSelection = () => {
+	const editor = vscode.window.activeTextEditor;
+
+	if (editor) {
+		const document = editor.document;
+		const selection = editor.selection;
+		const text = document.getText(selection);
+		const options = {
+			insertSpaces: editor.insertSpaces,
+			tabSize: editor.tabSize,
+		};
+
+		if(text) {
+			const formatted = format(text, getConfig(options));
+			editor.edit(editBuilder => {
+				editBuilder.replace(selection, formatted);
+			});
+		}
+	}
+};
+
 const format = (text, config) => sqlFormatter.format(text, config);
 
-module.exports.activate = () =>
+module.exports.activate = (context) => {
+	const formatSelectionCommand = vscode.commands.registerCommand('vscode-sql-formatter.format-selection', formatSelection);
+	
 	vscode.languages.registerDocumentRangeFormattingEditProvider('sql', {
 		provideDocumentRangeFormattingEdits: (document, range, options) => [
 			vscode.TextEdit.replace(range, format(document.getText(range), getConfig(options)))
 		]
 	});
+
+	context.subscriptions.push(formatSelectionCommand);
+}

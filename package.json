@@ -22,9 +22,16 @@
     "pl/sql"
   ],
   "activationEvents": [
-    "onLanguage:sql"
+    "onLanguage:sql",
+    "onCommand:vscode-sql-formatter.format-selection"
   ],
   "contributes": {
+    "commands": [
+      {
+        "command": "vscode-sql-formatter.format-selection",
+        "title": "SQL Formatter: Format the selected SQL using the configured settings"
+      }
+    ],
     "configuration": {
       "type": "object",
       "title": "SQL Formatter",
