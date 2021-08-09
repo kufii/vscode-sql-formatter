@@ -19,7 +19,8 @@
     "formatter",
     "n1ql",
     "db2",
-    "pl/sql"
+    "pl/sql",
+    "oraclesql"
   ],
   "activationEvents": [
     "onLanguage:sql"

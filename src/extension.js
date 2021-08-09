@@ -29,3 +29,10 @@ module.exports.activate = () =>
 			vscode.TextEdit.replace(range, format(document.getText(range), getConfig(options)))
 		]
 	});
+
+module.exports.activate = () =>
+	vscode.languages.registerDocumentRangeFormattingEditProvider('oraclesql', {
+		provideDocumentRangeFormattingEdits: (document, range, options) => [
+			vscode.TextEdit.replace(range, format(document.getText(range), getConfig(options)))
+		]
+	});
