@@ -15,11 +15,18 @@
     "Formatters"
   ],
   "keywords": [
-    "sql",
     "formatter",
-    "n1ql",
+    "prettier",
+    "sql",
     "db2",
-    "pl/sql"
+    "mariadb",
+    "mysql",
+    "n1ql",
+    "plsql",
+    "postgresql",
+    "redshift",
+    "spark",
+    "tsql"
   ],
   "activationEvents": [
     "onLanguage:sql"
@@ -33,6 +40,7 @@
           "scope": "resource",
           "type": "string",
           "enum": [
+            "sql",
             "db2",
             "mariadb",
             "mysql",
@@ -41,24 +49,23 @@
             "postgresql",
             "redshift",
             "spark",
-            "sql",
             "tsql"
           ],
           "default": "sql",
-          "description": "Which dialect to format with (sql: Standard SQL, n1ql: Couchbase N1QL, db2: IBM DB2, pl/sql: Oracle PL/SQL)"
+          "description": "Which dialect to format with?"
         },
         "sql-formatter.uppercase": {
           "scope": "resource",
           "type": "boolean",
           "default": false,
-          "description": "Convert keywords to uppercase"
+          "description": "Convert keywords to uppercase or not"
         },
         "sql-formatter.linesBetweenQueries": {
           "scope": "resource",
           "type": "number",
           "minimum": 1,
           "default": 2,
-          "description": "Change number of linebreaks between queries"
+          "description": "Number of linebreaks between queries"
         }
       }
     }
